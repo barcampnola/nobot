@@ -13,5 +13,5 @@
 module.exports = (robot) ->
 
   robot.respond /(reddit|r) random( (\w+))?/i, (msg) ->
-    sub = msg.match[2] || "random"
+    sub = msg.match[2].trim() || "random"
     msg.send "http://reddit.com/r/#{sub}/random"
