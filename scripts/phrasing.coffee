@@ -7,8 +7,32 @@
 # Configuration:
 #   None
 #
+# Commands:
+#   hubot phrasing - shows all the phrases that make the gif appear
 
 module.exports = (robot) ->
+  phrases = [
+    "happy ending",
+    "you have arrived",
+    "you came",
+    "i am coming for you",
+    "i ate it",
+    "i would eat that",
+    "this is going to suck",
+    "i want it",
+    "that thing is huge",
+    "pull out",
+    "suck it up",
+    "it won't fit",
+    "i don't see it",
+    "is it in yet",
+    "robert downey jr"
+  ]
 
-  robot.hear /\b(nuts|nut|balls deep|ball|cox|swallow|i swallowed|happy ending|coming up|you came|i am coming for you|tea bag|taco)\b/i, (msg) ->
+  regex = RegExp("\\b(#{phrases.join("|")})\\b", "i")
+
+  robot.hear regex, (msg) ->
     msg.send "http://i.imgur.com/i2yYun3.gif"
+
+  robot.respond /phrasing/i, (msg) ->
+    msg.send phrases.join(",\n")
