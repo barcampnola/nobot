@@ -24,6 +24,15 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         msg.send joel for joel in JSON.parse(body).joels
 
+  robot.respond /joel( (\w+))?/i, (msg) ->
+    tag = msg.match[2]
+    msg.http("http://joelme.herokuapp.com/" + tag)
+      .get() (err, res, body) =>
+        if res.statusCode == 404
+          msg.send "There are no #{tag} joels."
+        else
+          msg.send JSON.parse(body).joel
+
   robot.respond /how many joels are there/i, (msg) ->
     msg.http("http://joelme.herokuapp.com/count")
       .get() (err, res, body) ->
