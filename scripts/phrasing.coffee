@@ -26,7 +26,14 @@ module.exports = (robot) ->
     "it won't fit",
     "i don't see it",
     "is it in yet",
-    "robert downey jr"
+    "robert downey jr",
+    "low hanging fruit",
+    "i have arrived",
+    "nuts",
+    "balls",
+    "still at it",
+    "too fast",
+    "microsoft"
   ]
 
   regex = RegExp("\\b(#{phrases.join("|")})\\b", "i")
