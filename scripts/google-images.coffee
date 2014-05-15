@@ -6,6 +6,8 @@
 #   hubot animate me <query> - The same thing as `image me`, except adds a few parameters to try to return an animated GIF instead.
 #   hubot mustache me <url> - Adds a mustache to the specified URL.
 #   hubot mustache me <query> - Searches Google Images for the specified query and mustaches it.
+#   hubot upvote - Searches Google Images for an upvote gif
+#   hubot downvote - Searches Google Images for a downvote gif
 
 module.exports = (robot) ->
   robot.respond /(image|img)( me)? (.*)/i, (msg) ->
@@ -14,6 +16,14 @@ module.exports = (robot) ->
 
   robot.respond /animate( me)? (.*)/i, (msg) ->
     imageMe msg, msg.match[2], true, (url) ->
+      msg.send url
+
+  robot.respond /upvote/i, (msg) ->
+    imageMe msg, "upvote", true, (url) ->
+      msg.send url
+
+  robot.respond /downvote/i, (msg) ->
+    imageMe msg, "downvote", true, (url) ->
       msg.send url
 
   robot.respond /(?:mo?u)?sta(?:s|c)he?(?: me)? (.*)/i, (msg) ->
