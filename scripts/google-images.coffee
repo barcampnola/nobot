@@ -8,6 +8,7 @@
 #   hubot mustache me <query> - Searches Google Images for the specified query and mustaches it.
 #   hubot upvote - Searches Google Images for an upvote gif
 #   hubot downvote - Searches Google Images for a downvote gif
+#   hubot phrasing - Searches Google Images for a phrasing gif. For when someone says something phrase worthy
 
 module.exports = (robot) ->
   robot.respond /(image|img)( me)? (.*)/i, (msg) ->
@@ -24,6 +25,10 @@ module.exports = (robot) ->
 
   robot.respond /downvote/i, (msg) ->
     imageMe msg, "downvote", true, (url) ->
+      msg.send url
+
+  robot.respond /phrasing/i, (msg) ->
+    imageMe msg, "phrasing", true, (url) ->
       msg.send url
 
   robot.respond /(?:mo?u)?sta(?:s|c)he?(?: me)? (.*)/i, (msg) ->
@@ -51,4 +56,3 @@ imageMe = (msg, query, animated, faces, cb) ->
       if images?.length > 0
         image  = msg.random images
         cb "#{image.unescapedUrl}#.png"
-
